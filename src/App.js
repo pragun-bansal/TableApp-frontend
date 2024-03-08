@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import IndexPage from './components/IndexPage';
 import {BrowserRouter as Router, Routes, Route, Link, Navigate} from 'react-router-dom';
