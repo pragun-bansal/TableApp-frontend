@@ -1,20 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
-import Table from './components/Table';
+import Table1 from './components/Table1';
 import IndexPage from './components/IndexPage';
 import {BrowserRouter as Router, Routes, Route, Link, Navigate} from 'react-router-dom';
 import SideBar from './components/SideBar/SideBar';
 import { useState } from 'react';
+import Table from './components/Table';
 function App() {
 
-  const [id, setId] = useState("");
+
 
   return (
     <Router>
-      <SideBar setId={setId} id={id} />
+      <SideBar />
       <Routes>
-        <Route path="/" element={ <IndexPage setId={setId} id={id} />} />
-        <Route path="/table" element={<Table id={id}/>} />
+        <Route path="/" element={ <IndexPage s/>} />
+        <Route path="/table/:id" element={<Table />} />
       </Routes>
     </Router>
   );

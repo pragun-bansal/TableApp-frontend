@@ -4,8 +4,7 @@ import axios from 'axios';
 // import { useSearchParams } from 'react-router-dom';
 import {useParams} from 'react-router-dom';
 
-const Table = () => {
-  const {id} = useParams();
+const Table1 = ({id}) => {
   const [formData, setFormData] = useState({});
   const [update, setUpdate] = useState(0);
   const [table, setTable] = useState([]);
@@ -310,4 +309,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default Table1;

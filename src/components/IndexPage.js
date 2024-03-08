@@ -1,10 +1,12 @@
 import {React,useState,useEffect} from 'react';
 import { useNavigate} from "react-router-dom";
 import axios from 'axios';
+import { AiFillEdit } from 'react-icons/ai';
 
-const IndexPage = ({setId,id}) => {
+const IndexPage = () => {
     const Navigate = useNavigate();
     const [tables, setTables] = useState([]);
+    const [tableName, setTableName] = useState("");
 
     const fetchTables = async () => {
         const response =await axios.get(`${process.env.REACT_APP_SERVER_URL}/getAllTables`)
@@ -17,22 +19,44 @@ const IndexPage = ({setId,id}) => {
         }
     });
 
+    const handleEdit = async (e,table) => {
+        e.preventDefault();
+        console.log(table);
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/editTable`,table);
+        console.log(response.data);
+    }
 
     const handleTableClick = (table) => {
         console.log(table._id);
-        setId(table._id);
-        Navigate('/table')
+        Navigate(`/table/${table._id}`)
+        window.location.reload();
     };
 
-    const handleCreateTable = () => {
-        // Handle create table logic here
-        console.log('Creating a new table');
+    const handleCreateTable = (e) => {
+        e.preventDefault();
+        let name =""
+        if(tableName === ""){
+            name = "NEW TABLE"
+        }
+        const response = axios.post(`${process.env.REACT_APP_SERVER_URL}/savetable`,{name:tableName});
+        console.log(response.data);
+        fetchTables();
+        
     };
 
     return (
-        <div className="container mx-auto p-4 w-full">
-            <h1 className="text-3xl font-bold mb-4 mx-auto">Table Index</h1>
-            <ul className="space-y-2">
+        
+        <div className="container mx-auto p-4 items-center justify-center">
+            <h1 className="text-3xl font-bold mb-4">Table Index</h1>
+            <input name="table name" value={tableName} onChange={(e) => setTableName(e.target.value)}  type="text" className="border-2 border-gray-300 p-2 mt-4" placeholder="Enter Table Name" />
+            <br />
+            <button
+                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4"
+                onClick={handleCreateTable}
+            >
+                Create New Table
+            </button>
+            <ul className="space-y-2 my-4">
                 {tables.map((table, index) => (
                     <li key={index}>
                         <button
@@ -41,15 +65,17 @@ const IndexPage = ({setId,id}) => {
                         >
                             {table.name}
                         </button>
+                        <button
+                            className="bg-slate-300 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded ml-4 "
+                            onClick={(e) => handleEdit(e,table)}
+                        >
+                            Edit
+                        </button>
                     </li>
+                    
                 ))}
             </ul>
-            <button
-                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4"
-                onClick={handleCreateTable}
-            >
-                Create New Table
-            </button>
+           
         </div>
     );
 };
