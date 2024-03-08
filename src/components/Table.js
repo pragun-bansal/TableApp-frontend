@@ -3,16 +3,15 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 // import { useSearchParams } from 'react-router-dom';
 import {useParams} from 'react-router-dom';
+import TableName from './TableName';
 
 const Table = () => {
   const {id} = useParams();
   const [formData, setFormData] = useState({});
   const [update, setUpdate] = useState(0);
   const [table, setTable] = useState([]);
-  const [tableName, setTableName] = useState([]);
   const [entries, setEntries] = useState([]);
   const [checkedItems, setCheckedItems] = useState([]);
-  const [editTableName, setEditTableName] = useState(false);
 
   const fetchTable = async () => {
     const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/getTableById`, {
@@ -31,16 +30,7 @@ const Table = () => {
     setFormData({...formData, [e.target.name]: e.target.value});
   };
 
-  const handleEdit = async (e, table) => {
-    e.preventDefault();
-    console.log(table);
-    const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/updateTable`, {
-      name: tableName,
-      _id: id
-    });
-    console.log(response.data);
-    fetchTable();
-  };
+
 
   const handleSelectUpdate = (e, item) => {
     e.preventDefault();
@@ -135,31 +125,7 @@ const Table = () => {
   return (
     <div className="container mx-auto p-4">
       <div className='flex my-4 justify-center '>
-      {editTableName?
-      <>
-      <input name="table name" value={tableName} onChange={(e) => setTableName(e.target.value)}  type="text" className="border-2 border-gray-300 p-2 mt-4" placeholder="Enter Table Name" />
-      <button
-        className="bg-slate-300 hover:bg-slate-400 text-white text-[20px] font-bold py-2 px-4 rounded ml-4 "
-        onClick={e => {
-          handleEdit(e, table)
-          setEditTableName(false)
-        }
-          }>
-        Save
-      </button>
-      
-      </>
-     :
-     <>
-     <h1 className="text-2xl font-bold mb-4">{table.name}</h1>
-      <button
-      className="bg-slate-300 hover:bg-slate-400 text-white text-[20px] font-bold py-2 px-4 rounded ml-4 "
-      onClick={()=>{
-        setTableName(table.name)
-        setEditTableName(true)}}>
-      Edit
-    </button>
-    </>}
+      <TableName table={table}/>
       </div>
       <form onSubmit={handleFormSubmit} className="mb-4">
         <div className="flex flex-wrap mb-2">
@@ -222,6 +188,7 @@ const Table = () => {
           {entries?.map(item => (
             <>
               {update == item._id ? (
+                <tr>
                 <form onSubmit={handleUpdateSubmit} className="mb-4">
                   <div className="flex flex-wrap mb-2">
                     <div className="w-full sm:w-1/2 md:w-1/4 lg:w-1/6 px-2 mb-2">
@@ -270,6 +237,7 @@ const Table = () => {
                     </div>
                   </div>
                 </form>
+                </tr>
               ) : (
                 <tr key={item._id}>
                   <td className="p-2 border-b justify-center">
@@ -285,10 +253,10 @@ const Table = () => {
                       className="mr-2 bg-blue-500 p-2 text-white rounded"
                       onClick={e => {
                         if (update == item._id) {
+                          handleSelectUpdate(e, item);
                           setUpdate(0);
                         } else {
                           setUpdate(item._id);
-                          handleSelectUpdate(e, item);
                         }
                       }}>
                       {item._id == update ? 'Save' : 'Update'}

@@ -32,7 +32,7 @@ export default function Sidebar({}) {
   
 
   return (
-    <div>
+    <div >
       
       <button
         onClick={toggleSidebar}
@@ -58,7 +58,7 @@ export default function Sidebar({}) {
 
       <aside
         id="default-sidebar"
-        className={`fixed top-0 left-0 z-40 w-256 h-screen transition-transform duration-300 ${
+        className={`fixed top-0 left-0 z-40 w-1/4 h-screen transition-transform duration-300 ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } 2xl:translate-x-0`}
         aria-label="Sidebar"

@@ -2,6 +2,7 @@ import {React,useState,useEffect} from 'react';
 import { useNavigate} from "react-router-dom";
 import axios from 'axios';
 import { AiFillEdit } from 'react-icons/ai';
+import TableName from './TableName';
 
 const IndexPage = () => {
     const Navigate = useNavigate();
@@ -59,18 +60,9 @@ const IndexPage = () => {
             <ul className="space-y-2 my-4">
                 {tables.map((table, index) => (
                     <li key={index}>
-                        <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                            onClick={() => handleTableClick(table)}
-                        >
-                            {table.name}
-                        </button>
-                        <button
-                            className="bg-slate-300 hover:bg-slate-400 text-white font-bold py-2 px-4 rounded ml-4 "
-                            onClick={(e) => handleEdit(e,table)}
-                        >
-                            Edit
-                        </button>
+                        
+                        <TableName table={table} />
+                        
                     </li>
                     
                 ))}

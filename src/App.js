@@ -1,6 +1,5 @@
 import logo from './logo.svg';
 import './App.css';
-import Table1 from './components/Table1';
 import IndexPage from './components/IndexPage';
 import {BrowserRouter as Router, Routes, Route, Link, Navigate} from 'react-router-dom';
 import SideBar from './components/SideBar/SideBar';
