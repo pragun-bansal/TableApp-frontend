@@ -35,7 +35,7 @@ const Table = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleFormChange2 = (e) => {
-    setFormData2({ ...formData, [e.target.name]: e.target.value });
+    setFormData2({ ...formData2, [e.target.name]: e.target.value });
   };
 
   const handleSelectUpdate = (e, item) => {
@@ -115,32 +115,6 @@ const Table = () => {
     fetchTable();
   };
 
-  // const handleUpdateSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     console.log(formData);
-  //     if (
-  //       formData.name.length == 0 ||
-  //       formData.phone_number.length == 0 ||
-  //       formData.email.legth == 0 ||
-  //       formData.hobby.length == 0
-  //     ) {
-  //       console.log("Please fill all fields");
-  //     } else {
-  //       const response = await axios.post(
-  //         `${process.env.REACT_APP_SERVER_URL}/updateEntry`,
-  //         {
-  //           ...formData,
-  //           tableId: id,
-  //         }
-  //       );
-  //       console.log(response.data);
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  //   fetchTable();
-  // };
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -246,6 +220,7 @@ const Table = () => {
                 <td className="p-2 border-b text-center">{item._id}</td>
                 <td className="p-2 border-b text-center">
                   {update == item._id ? (
+                    
                     <input
                       type="text"
                       name="name"
@@ -305,15 +280,16 @@ const Table = () => {
                     className="mr-2 bg-blue-500 p-2 text-white rounded"
                     onClick={(e) => {
                       if (update == item._id) {
-                        formData2.id = item._id;
-                        formData2.name = item.name;
-                        formData2.phone_number = item.phone_number;
-                        formData2.email = item.email;
-                        formData2.hobby = item.hobby;
+                        
 
                         handleUpdateSubmit(e);
                         setUpdate(null);
                       } else {
+                        formData2._id = item._id;
+                        formData2.name = item.name;
+                        formData2.phone_number = item.phone_number;
+                        formData2.email = item.email;
+                        formData2.hobby = item.hobby;
                         setUpdate(item._id);
                       }
                     }}
