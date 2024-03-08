@@ -10,7 +10,7 @@ const IndexPage = () => {
     const [tableName, setTableName] = useState("");
 
     const fetchTables = async () => {
-        const response =await axios.get(`${process.env.REACT_APP_SERVER_URL}/getAllTables`)
+        const response =await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getAllTables`)
         setTables(response.data);
     };
 
@@ -23,7 +23,7 @@ const IndexPage = () => {
     const handleEdit = async (e,table) => {
         e.preventDefault();
         console.log(table);
-        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/editTable`,table);
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/editTable`,table);
         console.log(response.data);
     }
 
@@ -39,7 +39,7 @@ const IndexPage = () => {
         if(tableName === ""){
             name = "NEW TABLE"
         }
-        const response = axios.post(`${process.env.REACT_APP_SERVER_URL}/savetable`,{name:tableName});
+        const response = axios.post(`${process.env.REACT_APP_SERVER_URL}/api/savetable`,{name:tableName});
         console.log(response.data);
         fetchTables();
         

@@ -3,7 +3,7 @@ import axios from 'axios'
 const SendButton = ({table,checkedItems}) => {
 
     const handleEmail = async (recipientEmail) => {
-        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/sendEmail`, {
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/sendEmail`, {
             table: table,
             checkedItems: checkedItems,
             recipientEmail: recipientEmail

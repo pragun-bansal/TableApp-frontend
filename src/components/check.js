@@ -12,7 +12,7 @@ const Table = ({ id }) => {
     const [checkedItems, setCheckedItems] = useState([]);
 
     const fetchTable = async () => {
-        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/getTableById`, {
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/getTableById`, {
             _id: id,
         });
         console.log(response.data);
@@ -63,7 +63,7 @@ const Table = ({ id }) => {
             ) {
                 console.log('Please fill all fields');
             } else {
-                const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/saveEntry`, {
+                const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/saveEntry`, {
                     ...formData,
                     tableId: id,
                 });
@@ -78,7 +78,7 @@ const Table = ({ id }) => {
     const handleDelete = async (e, item) => {
         e.preventDefault();
         console.log(item);
-        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/deleteEntry`, {
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/deleteEntry`, {
             _id: item._id,
         });
         console.log(response.data);

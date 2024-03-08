@@ -9,7 +9,7 @@ const TableName = ({table}) => {
     const handleEdit = async (e, table) => {
         e.preventDefault();
         console.log(tableName);
-        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/updateTable`, {
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/updateTable`, {
             _id: table._id,
             name: tableName
         });
