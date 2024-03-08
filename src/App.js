@@ -13,7 +13,7 @@ function App() {
     <Router>
       <SideBar />
       <Routes>
-        <Route path="/" element={ <IndexPage s/>} />
+        <Route path="/" element={ <IndexPage />} />
         <Route path="/table/:id" element={<Table />} />
       </Routes>
     </Router>

@@ -17,6 +17,17 @@ const TableName = ({table}) => {
         console.log(response);
         window.location.reload();
       };
+
+      const handleDelete = async (e, table) => {
+        e.preventDefault();
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/deleteTable`, {
+            _id: table._id
+        });
+        console.log(response);
+        Navigate('/');
+        window.location.reload();
+      }
+
   return (<>
     {editTableName?
         <span className="flex space-x-4 w-full justify-center items-center text-center">
@@ -51,11 +62,9 @@ const TableName = ({table}) => {
       <button
         className="bg-slate-300 hover:bg-slate-400 text-white text-[20px] font-bold p-auto rounded ml-4 justify-center items-center"
         onClick={(e)=>{
-            e.preventDefault()
-          setTableName(table.name)
-            setEditTableName(true)
+            handleDelete(e, table)
         }}>
-        
+        Delete
       </button>
       </span>}
       </>
