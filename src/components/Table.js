@@ -5,6 +5,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import TableName from "./TableName";
 import SendButton from "./SendButton";
+import BasicExample from "./BasicExample";
 
 const Table = () => {
   const { id } = useParams();
@@ -14,7 +15,7 @@ const Table = () => {
   const [table, setTable] = useState([]);
   const [entries, setEntries] = useState([]);
   const [checkedItems, setCheckedItems] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   const fetchTable = async () => {
     const response = await axios.post(
       `${process.env.REACT_APP_SERVER_URL}/api/getTableById`,
@@ -23,6 +24,7 @@ const Table = () => {
       }
     );
     console.log(response.data);
+    setLoading(false);
     setTable(response.data.table);
     setEntries(response.data.entries);
   };
@@ -142,6 +144,8 @@ const Table = () => {
   };
 
   return (
+    <>
+    {loading?<div className='flex-row w-[100vw] h-[100vh] items-center justify-center text-center py-[40vh]'><BasicExample /></div> : 
     <div className="container mx-auto p-4">
       <div className="flex my-4 justify-center ">
         <TableName table={table} />
@@ -312,7 +316,8 @@ const Table = () => {
           Delete
         </button>
       </div>
-    </div>
+    </div>}
+    </>
   );
 };
 
