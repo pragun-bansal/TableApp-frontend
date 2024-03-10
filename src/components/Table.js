@@ -187,7 +187,7 @@ const Table = () => {
           <div className="w-full sm:w-1/2 md:w-1/4 lg:w-1/6 px-2 mb-2">
             <button
               type="submit"
-              className="w-full p-2 bg-blue-500 text-white rounded"
+              className="w-full p-2 bg-blue-500 hover:bg-blue-600 shadow hover:shadow-lg text-white rounded"
               onClick={(e) => handleFormSubmit}
             >
               Add Entry
@@ -277,7 +277,8 @@ const Table = () => {
                 </td>
                 <td className="p-2 border-b text-center justify-center">
                   <button
-                    className="mr-2 bg-blue-500 p-2 text-white rounded"
+                    className="mr-2  shadow hover:shadow-lg p-2 text-white rounded"
+                    class = {update == item._id ? "bg-green-500 hover:bg-green-700 shadow hover:shadow-lg text-white rounded p-4" : "bg-blue-500 hover:bg-blue-600 shadow hover:shadow-lg text-white rounded p-4"}
                     onClick={(e) => {
                       if (update == item._id) {
                         
@@ -305,7 +306,7 @@ const Table = () => {
       <div className="flex justify-end mt-4">
       <SendButton table={table} checkedItems={checkedItems} />
         <button
-          className="bg-red-500 text-white rounded p-4"
+          className="bg-red-500 hover:bg-red-700 shadow hover:shadow-lg text-white rounded p-4"
           onClick={handleDelete}
         >
           Delete

@@ -52,18 +52,19 @@ const IndexPage = () => {
         const response = axios.post(`${process.env.REACT_APP_SERVER_URL}/api/savetable`,{name:tableName});
         console.log(response.data);
         fetchTables();
-        
+        window.location.reload();
     };
 
     return (
         <>
         {loading?<div className='flex-row w-[100vw] h-[100vh] items-center justify-center text-center py-[40vh]'><BasicExample /></div> : 
-        <div className="container mx-auto p-4 items-center justify-center">
+        <div className="container mx-auto p-4">
+            <div className='w-[20%]'></div>
             <h1 className="text-3xl font-bold mb-4">Table Index</h1>
             <input name="table name" value={tableName} onChange={(e) => setTableName(e.target.value)}  type="text" className="border-2 border-gray-300 p-2 mt-4" placeholder="Enter Table Name" />
             <br />
             <button
-                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4"
+                className="bg-green-500 hover:bg-green-700 shadow hover:shadow-lg text-white font-bold py-2 px-4 rounded mt-4"
                 onClick={handleCreateTable}
             >
                 Create New Table
@@ -72,7 +73,6 @@ const IndexPage = () => {
                 <ul className="space-y-2 my-4">
                 {tables.map((table, index) => (
                     <li key={index}>
-                        
                         <TableName table={table} />
                         
                     </li>

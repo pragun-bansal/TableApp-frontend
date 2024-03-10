@@ -18,7 +18,7 @@ const SendButton = ({table,checkedItems}) => {
         }
     }
   return (
-    <button className="mr-2 bg-blue-500 text-white rounded p-4" onClick={popUp}>Send Email</button>
+    <button className="mr-2 bg-blue-500 hover:bg-blue-600 shadow hover:shadow-lg text-white rounded p-4" onClick={popUp}>Send Email</button>
   )
 }
 
